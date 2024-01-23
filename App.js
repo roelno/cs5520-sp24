@@ -8,11 +8,15 @@ export default function App() {
   const appName = "My First App";
   const [text, setText] = useState("");
 
+  const receiveInput = (newText) => {
+    setText(newText);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Header name={appName} version={2} />
-      <Input text={text} setText={setText} />
+      <Input inputHandler={receiveInput} />
       <Text>{text}</Text>
     </View>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 
-const Input = ({ text, setText }) => {
+const Input = ({ inputHandler }) => {
+  const [text, setText] = useState("");
 
   return (
     <View>
@@ -9,8 +10,13 @@ const Input = ({ text, setText }) => {
         placeholder="Type something here"
         style={styles.input}
         value={text}
-        onChangeText={setText}
+        onChangeText={(newText) => setText(newText)} 
       />
+      <Button 
+        title="Confirm"
+        onPress={() => inputHandler(text)}
+        />
+
     </View>
   );
 };
