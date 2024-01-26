@@ -16,14 +16,18 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
           onChangeText={(newText) => setText(newText)} 
         />
         <View style={styles.buttonContainer}>
-          <Button
-            title='Cancel'
-            onPress={() => dissmissModal()}
-          />
-          <Button 
-            title="Confirm"
-            onPress={() => inputHandler(text)}
+          <View style={styles.buttonView} >
+            <Button
+              title='Cancel'
+              onPress={() => dissmissModal()}
             />
+          </View>
+          <View style={styles.buttonView}>
+            <Button
+              title='Confirm'
+              onPress={() => inputHandler(text)}
+            />
+          </View>
         </View>
       </View>
     </Modal>
@@ -49,8 +53,12 @@ const styles = StyleSheet.create({
   buttonContainer: { 
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '50%',
-    marginTop: 10
+    width: '60%',
+    // marginTop: 10
+  },
+  buttonView: {
+    width: '40%',
+    margin: 5
   }
 });
 

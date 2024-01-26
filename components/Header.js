@@ -8,7 +8,6 @@ const Header = ({ name, version }) => {
   return (
     <View>
       <Text style={styles.header}>Welcome to {name} version {version}!</Text>
-
     </View>
   )
 }
@@ -24,11 +23,12 @@ const styles = StyleSheet.create({
     flexi : 1,
     fontSize: 20,
     color: 'darkmagenta',
-    bordercolor: 'darkmagenta',
+    borderColor: 'darkmagenta',
     borderWidth: 2,
     borderRadius: 5,
     padding: 5,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 20,
   }
 });
 
