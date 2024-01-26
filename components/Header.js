@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
   },
   header: {
     flexi : 1,
-    fontSize: 24,
-    color: 'purple',
-    bordercolor: 'purple',
-    borderwidth: 2,
-    borderradius: 5,
+    fontSize: 20,
+    color: 'darkmagenta',
+    bordercolor: 'darkmagenta',
+    borderWidth: 2,
+    borderRadius: 5,
     padding: 5,
     fontWeight: 'bold'
   }

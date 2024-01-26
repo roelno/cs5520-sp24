@@ -5,9 +5,10 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
   const [text, setText] = useState("");
 
   return (
-    <Modal style={styles.container} visible={modalVisible}>
-      <View>
+    <Modal visible={modalVisible}>
+      <View style={styles.container} >
         <Image source={{uri:"https://upload.wikimedia.org/wikipedia/en/0/0f/Space_Invaders_flyer%2C_1978.jpg",}} style={styles.image} />
+        <Image source={require('./../assets/enemy.bmp')} style={styles.image} />
         <TextInput
           placeholder="Type something here"
           style={styles.input}
@@ -42,8 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 200,
-    height: 200
+    width: 100,
+    height: 100
   },
   buttonContainer: { 
     flexDirection: 'row',
