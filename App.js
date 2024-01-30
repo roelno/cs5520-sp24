@@ -12,7 +12,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Header name={appName} version={2} />
-      <Input text={text} setText={setText} />
+      <Input text={text} setText={(newText) => setText(newText)} />
       <Text>{text}</Text>
     </View>
   );
