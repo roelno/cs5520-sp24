@@ -26,6 +26,7 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
             <Button
               title='Confirm'
               onPress={() => inputHandler(text)}
+              disabled={!text}
             />
           </View>
         </View>
@@ -54,10 +55,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '60%',
-    marginTop: 10
+    // marginTop: 10
   },
   buttonView: {
-    width: '40%',
+    // width: '40%',
     margin: 5
   }
 });
