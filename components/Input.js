@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '60%',
-    // marginTop: 10
+    marginTop: 10
   },
   buttonView: {
     width: '40%',
