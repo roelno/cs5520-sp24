@@ -29,6 +29,12 @@ export default function App() {
     setIsModalVisible(false);
   }
 
+  const goalDeleteHandler = (goalId) => {
+    setGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -63,7 +69,7 @@ export default function App() {
           data={goals}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <GoalItem item = {item}/>
+            <GoalItem item = {item} goalDeleteFunction = {goalDeleteHandler}/>
           )}
         />
       </View>
