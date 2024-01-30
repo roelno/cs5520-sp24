@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Button, TurboModuleRegistry, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, TurboModuleRegistry, SafeAreaView, ScrollView, FlatList } from "react-native";
 import { useState } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const appName = "My First App";
@@ -47,7 +48,7 @@ export default function App() {
         />
       </View>
 
-      <View style={styles.bottomView}>
+      {/* <View style={styles.bottomView}>
       <ScrollView>
         {goals.map((goal) => (
           <View key={goal.id} style={styles.textContainer}>
@@ -55,6 +56,16 @@ export default function App() {
           </View>
         ))}
       </ScrollView>
+      </View> */}
+      
+      <View style={styles.bottomView}>
+        <FlatList
+          data={goals}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <GoalItem item = {item}/>
+          )}
+        />
       </View>
       
     </SafeAreaView>
@@ -85,20 +96,6 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     marginTop: 10, 
-  },
-  textContainer: {
-    alignItems: "center",
-    backgroundColor: "purple",
-    margin: 10,
-    borderRadius: 10,
-    padding: 30,
-    
-  },
-  goalText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 18,
-
   },
 
 });

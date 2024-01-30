@@ -25,7 +25,7 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
           <View style={styles.buttonView}>
             <Button
               title='Confirm'
-              onPress={() => inputHandler(text)}
+              onPress={() => {inputHandler(text); setText("")}}
               disabled={!text}
             />
           </View>
