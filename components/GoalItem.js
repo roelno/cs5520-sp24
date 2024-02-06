@@ -23,6 +23,7 @@ export default GoalItem
 const styles = StyleSheet.create({
     textContainer: {
         flexDirection: "row",
+        justifyContent: "space-around",
         alignItems: "center",
         backgroundColor: "purple",
         margin: 10,

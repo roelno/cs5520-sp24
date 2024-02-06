@@ -30,9 +30,8 @@ export default function App() {
   }
 
   const goalDeleteHandler = (goalId) => {
-    setGoals((currentGoals) => {
-      return currentGoals.filter((goal) => goal.id !== goalId);
-    });
+    const updatedGoals = goals.filter((goal) => goal.id !== goalId);
+    setGoals(updatedGoals);
   }
 
   return (
