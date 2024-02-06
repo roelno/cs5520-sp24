@@ -13,7 +13,7 @@ const GoalItem = ({item, goalDeleteFunction, goalDetailsFunction}) => {
         />
         <Button
         title='Details'
-        onPress={() => {goalDetailsFunction(item.id)}}
+        onPress={() => {goalDetailsFunction(item)}}
         />
 
     </View>

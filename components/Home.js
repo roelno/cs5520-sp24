@@ -34,9 +34,9 @@ export default function Home({navigation}) {
     setGoals(updatedGoals);
   }
 
-  const goalDetailsHandler = (goalId) => {
-    console.log(goalId);
-    navigation.navigate("GoalDetails", {goalId: goalId});
+  const goalDetailsHandler = (goal) => {
+    console.log(goal.id);
+    navigation.navigate("GoalDetails", {goalData: goal});
   }
 
   return (
