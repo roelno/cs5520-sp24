@@ -5,7 +5,7 @@ import Header from "./Header";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
 
-export default function Home() {
+export default function Home({navigation}) {
   const appName = "My First App";
   // const [text, setText] = useState("");
   const [goals, setGoals] = useState([]); // [goal1, goal2, goal3]
@@ -32,6 +32,11 @@ export default function Home() {
   const goalDeleteHandler = (goalId) => {
     const updatedGoals = goals.filter((goal) => goal.id !== goalId);
     setGoals(updatedGoals);
+  }
+
+  const goalDetailsHandler = (goalId) => {
+    console.log(goalId);
+    navigation.navigate("GoalDetails", {goalId: goalId});
   }
 
   return (
@@ -68,7 +73,9 @@ export default function Home() {
           data={goals}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <GoalItem item = {item} goalDeleteFunction = {goalDeleteHandler}/>
+            <GoalItem item = {item} 
+            goalDeleteFunction = {goalDeleteHandler}
+            goalDetailsFunction = {goalDetailsHandler}/>
           )}
         />
       </View>

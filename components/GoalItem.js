@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react'
 
 
-const GoalItem = ({item, goalDeleteFunction}) => {
+const GoalItem = ({item, goalDeleteFunction, goalDetailsFunction}) => {
   return (
     <View style={styles.textContainer}>
         <Text style={styles.goalText}>{item.value}</Text>
@@ -10,6 +10,10 @@ const GoalItem = ({item, goalDeleteFunction}) => {
         <Button
         title='Delete'
         onPress={() => {goalDeleteFunction(item.id)}}
+        />
+        <Button
+        title='Details'
+        onPress={() => {goalDetailsFunction(item.id)}}
         />
 
     </View>
