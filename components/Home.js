@@ -47,7 +47,7 @@ export default function Home({navigation}) {
         <Header name={appName} version={2} />
         <View style={styles.buttonContainer}>
           <Button 
-            title="Add a Goal" 
+            title='Add a Goal'
             onPress={() => setIsModalVisible(true)} 
           />
         </View>

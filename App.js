@@ -12,10 +12,18 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerStyle: styles.headerStyle, headerTintColor: 'white'}}>
         <Stack.Screen 
-          options={{title: 'My Home Screen'}} 
+          options={{title: "My Home Screen"}} 
           name="Home" 
           component={Home} />
-        <Stack.Screen name="GoalDetails" component={GoalDetails} />
+        <Stack.Screen 
+          options={({route}) => {
+            return  {
+              title: route.params.goalData.value, 
+              headerTitleAlign: 'center',
+            }
+          }} 
+          name="GoalDetails" 
+          component={GoalDetails} />
       </Stack.Navigator>
     </NavigationContainer>
 
