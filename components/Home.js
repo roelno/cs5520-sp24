@@ -57,16 +57,6 @@ export default function Home({navigation}) {
         dissmissModal={dissmissModal}
         />
       </View>
-
-      {/* <View style={styles.bottomView}>
-      <ScrollView>
-        {goals.map((goal) => (
-          <View key={goal.id} style={styles.textContainer}>
-            <Text style={styles.goalText}>{goal.value}</Text>
-          </View>
-        ))}
-      </ScrollView>
-      </View> */}
       
       <View style={styles.bottomView}>
         <FlatList

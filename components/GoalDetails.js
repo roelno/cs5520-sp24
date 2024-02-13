@@ -9,7 +9,7 @@ const GoalDetails = ({navigation, route}) => {
     }
 
     useEffect(() => {
-        navigation.setOptions({headerRight: () => {return <Button title='Warning' onPress={warningHandler} icon="alert" color="gray" />}});
+        navigation.setOptions({headerRight: () => {return <Button title='Warning' onPress={warningHandler} icon="alert" color="green" />}});
         }, [warning]);
 
     const {goalData} = route.params;

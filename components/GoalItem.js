@@ -1,22 +1,38 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Pressable } from 'react-native'
 import React from 'react'
 
 
 const GoalItem = ({item, goalDeleteFunction, goalDetailsFunction}) => {
+  const onTap = () => {
+    goalDetailsFunction(item);
+  }
+  
   return (
     <View style={styles.textContainer}>
-        <Text style={styles.goalText}>{item.value}</Text>
+      <Pressable
+        onPress={onTap}
+        android_ripple={{ color: 'white' }}
+        style={({ pressed }) => [
+          styles.button,
+          {
+            opacity: pressed
+              ? 0.5
+              : 1,
+            backgroundColor: pressed ? 'pink' : 'purple',
+          }
+        ]}>
+          <Text style={styles.goalText}>{item.value}</Text>
 
-        <Button
-        title='Delete'
-        onPress={() => {goalDeleteFunction(item.id)}}
-        />
-        <Button
-        title='Details'
-        onPress={() => {goalDetailsFunction(item)}}
-        />
+          <Button
+          title='Delete'
+          onPress={() => {goalDeleteFunction(item.id)}}
+          />
 
+      </Pressable>
     </View>
+    
+        
+
     
 
   )
@@ -39,5 +55,13 @@ const styles = StyleSheet.create({
         color: "white",
         textAlign: "center",
         fontSize: 18,
+        marginBottom: 10,
+    },
+    button: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 4,
+      width: 300,
+      borderRadius: 10,
     },
 })
