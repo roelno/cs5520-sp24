@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "./Header";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
+import PressableButton from "./PressableButton";
 
 export default function Home({navigation}) {
   const appName = "My First App";
@@ -45,12 +46,11 @@ export default function Home({navigation}) {
 
       <View style={styles.topView}>
         <Header name={appName} version={2} />
-        <View style={styles.buttonContainer}>
-          <Button 
-            title='Add a Goal'
-            onPress={() => setIsModalVisible(true)} 
-          />
-        </View>
+
+        <PressableButton customStyle={styles.addButton} onPressFunction={() => setIsModalVisible(true)}>
+          <Text style={{color: 'white', fontSize: 20}}>Add a Goal</Text>
+        </PressableButton>
+
         <Input style={styles.inputStyle}
         inputHandler={receiveInput} 
         modalVisible={isModalVisible}
@@ -98,6 +98,14 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     marginTop: 10, 
+  },
+  addButton: {
+    backgroundColor: 'purple',
+    padding: 10,
+    borderRadius: 10,
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
 });

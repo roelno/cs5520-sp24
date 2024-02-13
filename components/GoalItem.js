@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, Button, Pressable } from 'react-native'
 import React from 'react'
+import PressableButton from './PressableButton';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 const GoalItem = ({item, goalDeleteFunction, goalDetailsFunction}) => {
   const onTap = () => {
     goalDetailsFunction(item);
   }
-  
+
   return (
     <View style={styles.textContainer}>
       <Pressable
@@ -23,10 +25,9 @@ const GoalItem = ({item, goalDeleteFunction, goalDetailsFunction}) => {
         ]}>
           <Text style={styles.goalText}>{item.value}</Text>
 
-          <Button
-          title='Delete'
-          onPress={() => {goalDeleteFunction(item.id)}}
-          />
+          <PressableButton customStyle = {styles.deleteButton} onPressFunction={() => {goalDeleteFunction(item.id)}}>
+            <MaterialIcons name="delete" size={24} color="white" />
+          </PressableButton>
 
       </Pressable>
     </View>
@@ -64,4 +65,12 @@ const styles = StyleSheet.create({
       width: 300,
       borderRadius: 10,
     },
+    deleteButton: {
+      backgroundColor: 'green',
+      padding: 10,
+      borderRadius: 10,
+      width: 100,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
 })
