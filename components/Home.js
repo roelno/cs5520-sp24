@@ -5,8 +5,10 @@ import Header from "./Header";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
+import { db } from "../firebase/firebase-config";
 
 export default function Home({navigation}) {
+  console.log(db);
   const appName = "My First App";
   // const [text, setText] = useState("");
   const [goals, setGoals] = useState([]); // [goal1, goal2, goal3]
