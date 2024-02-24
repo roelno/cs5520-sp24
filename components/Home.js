@@ -6,7 +6,7 @@ import Input from "./Input";
 import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
 import { db } from "../firebase/firebase-config";
-import{ addDocument } from "../firebase/firestoreHelper";
+import{ addDocument, deleteDocument } from "../firebase/firestoreHelper";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
 export default function Home({navigation}) {
@@ -27,7 +27,7 @@ export default function Home({navigation}) {
       const newArray = [];
       querySnapshot.forEach((doc) => {
         // console.log(doc.data());
-        newArray.push(doc.data(), id=doc.id);
+        newArray.push({...doc.data(), id:doc.id});
       } );
       console.log(newArray);
       setGoals(newArray);
@@ -52,8 +52,9 @@ export default function Home({navigation}) {
   }
 
   const goalDeleteHandler = (goalId) => {
-    const updatedGoals = goals.filter((goal) => goal.id !== goalId);
-    setGoals(updatedGoals);
+    // const updatedGoals = goals.filter((goal) => goal.id !== goalId);
+    // setGoals(updatedGoals);
+    deleteDocument(db, "goals", goalId);
   }
 
   const goalDetailsHandler = (goal) => {

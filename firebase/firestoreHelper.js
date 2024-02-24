@@ -33,6 +33,11 @@ export const addDocument = async (db, collectionName, data) => {
 //     await updateDoc(docRef, data);
 // }
 
-// export const deleteDocument = async (db, collectionName, docId) => {
-//     await deleteDoc(doc(db, collectionName, docId));
-// }
+export const deleteDocument = async (db, collectionName, docId) => {
+    try {
+        await deleteDoc(doc(db, collectionName, docId));
+    }   
+    catch (e) {
+        console.error("Error deleting document: ", e);
+    }
+}
