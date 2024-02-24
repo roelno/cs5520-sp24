@@ -1,31 +1,50 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Button, TurboModuleRegistry, SafeAreaView, ScrollView, FlatList } from "react-native";
-import { useState } from "react";
+import { StyleSheet, Text, View, TextInput, Button, TurboModuleRegistry, SafeAreaView, ScrollView, FlatList, Alert } from "react-native";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
 import { db } from "../firebase/firebase-config";
+import{ addDocument } from "../firebase/firestoreHelper";
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 export default function Home({navigation}) {
-  console.log(db);
   const appName = "My First App";
   // const [text, setText] = useState("");
   const [goals, setGoals] = useState([]); // [goal1, goal2, goal3]
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  useEffect(() => {
+    // set up a listener to get the goals from the database - only once
+    onSnapshot(collection(db, "goals"), (querySnapshot) => {
+
+      if (querySnapshot.empty) {
+        Alert.alert("No goals found, you need to add some goals.");
+        return;
+      }
+
+      const newArray = [];
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.data());
+        newArray.push(doc.data(), id=doc.id);
+      } );
+      console.log(newArray);
+      setGoals(newArray);
+    });
+  } , []);
+
   const receiveInput = (newText) => {
     // define an object to hold the new goal
-    const newGoal = {
-      id: Math.random().toString(),
-      value: newText,
-    };
+    const newGoal = { value: newText};
 
     // add the new goal to the goals array
-    setGoals((currentGoals) => [...currentGoals, newGoal]);
+    // setGoals((currentGoals) => [...currentGoals, newGoal]);
 
     // close the modal  
     setIsModalVisible(false);
+
+    addDocument(db, "goals", newGoal);
   };
 
   const dissmissModal = () => {
@@ -38,7 +57,7 @@ export default function Home({navigation}) {
   }
 
   const goalDetailsHandler = (goal) => {
-    console.log(goal.id);
+    // console.log(goal.id);
     navigation.navigate("GoalDetails", {goalData: goal});
   }
 
