@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Button } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import GoalUsers from './GoalUsers';
 
 const GoalDetails = ({navigation, route}) => {
     const [warning, setWarning] = useState(false); 
@@ -19,7 +20,10 @@ const GoalDetails = ({navigation, route}) => {
             <Text>Goal ID: {JSON.stringify(goalData.id)}</Text>
             <Text>Goal Value: {JSON.stringify(goalData.value)}</Text>
             {warning && <Text>Warning: This is a warning message</Text>}
+
+            <GoalUsers />
         </View>
+        
     )
 }
 
