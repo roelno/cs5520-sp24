@@ -1,7 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { addDocument } from '../firebase/firestoreHelper';
+import { db } from '../firebase/firebase-config';
 
-const GoalUsers = () => {
+const GoalUsers = ( { id } ) => {
+
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -13,8 +18,17 @@ const GoalUsers = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+        
+        topLevelUsers = await response.json();
+        setUsers(topLevelUsers);
 
-        const data = await response.json();
+        topLevelUsers.forEach((user) => {
+          // write to subcollection
+          console.log(id);
+          addDocument(db, "goals", user, id, "users");
+        });
+        
+        
 
       }
       catch (error) {
@@ -24,9 +38,17 @@ const GoalUsers = () => {
     fetchData();
   }, []);
 
+
+
   return (
     <View>
       <Text>GoalUsers</Text>
+      <FlatList
+        data={users}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+      />
+
     </View>
   )
 }

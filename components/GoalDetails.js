@@ -21,7 +21,7 @@ const GoalDetails = ({navigation, route}) => {
             <Text>Goal Value: {JSON.stringify(goalData.value)}</Text>
             {warning && <Text>Warning: This is a warning message</Text>}
 
-            <GoalUsers />
+            <GoalUsers id={goalData.id} />
         </View>
         
     )
