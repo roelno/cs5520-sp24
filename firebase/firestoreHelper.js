@@ -20,9 +20,9 @@ export const getAllDocs = async (path) => {
     try {
         const querySnapShot = await getDocs(collection(db, path));
         let newArray = [];
-        querySnapShot.forEach((doc) => {
-            newArray.push(doc.data());
-            console.log(doc.data());
+        querySnapShot.forEach((docSnapShot) => {
+            newArray.push(docSnapShot.data());
+            console.log(docSnapShot.data());
         });
         return newArray;
     }   
