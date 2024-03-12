@@ -16,6 +16,21 @@ export const addDocument = async (db, data, collectionName, docID, subCollection
     }
 }
 
+export const getAllDocs = async (path) => {
+    try {
+        const querySnapShot = await getDocs(collection(db, path));
+        let newArray = [];
+        querySnapShot.forEach((doc) => {
+            newArray.push(doc.data());
+            console.log(doc.data());
+        });
+        return newArray;
+    }   
+    catch (e) {
+        console.error("Error get all docs: ", e);
+    }
+}
+
 
 export const deleteDocument = async (db, collectionName, docId) => {
     try {

@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { addDocument } from '../firebase/firestoreHelper';
+import { addDocument, getAllDocs } from '../firebase/firestoreHelper';
 import { db } from '../firebase/firebase-config';
 
 const GoalUsers = ( { id } ) => {
@@ -10,6 +10,12 @@ const GoalUsers = ( { id } ) => {
   useEffect(() => {
     async function fetchData() {
       try {
+        const usersfromDB = await getAllDocs(`goals/${id}/users`);
+        if (usersfromDB.length) {
+          setUsers(usersfromDB);
+          return;
+        }
+
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
         console.log(response.status); 
         // if the status is 200, then the response is ok
@@ -24,9 +30,8 @@ const GoalUsers = ( { id } ) => {
 
         topLevelUsers.forEach((user) => {
           // write to subcollection
-          console.log(id);
           // addDocument(db, user, "goals", id, "users");
-          // Or, (database, data, path) as below
+          // Or use (database, data, path) as below
           addDocument(db, user, `goals/${id}/users`);
         });
         
