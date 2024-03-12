@@ -17,8 +17,8 @@ export default function Home({navigation}) {
 
   useEffect(() => {
     // set up a listener to get the goals from the database - only once
-    onSnapshot(collection(db, "goals"), (querySnapshot) => {
-
+    
+    const unsubsribe = onSnapshot(collection(db, "goals"), (querySnapshot) => {
       if (querySnapshot.empty) {
         Alert.alert("No goals found, you need to add some goals.");
         return;
@@ -32,6 +32,10 @@ export default function Home({navigation}) {
       console.log(newArray);
       setGoals(newArray);
     });
+    return () => {
+      console.log("clean up");
+      unsubsribe();
+    }
   } , []);
 
   const receiveInput = (newText) => {
