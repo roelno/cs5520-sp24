@@ -48,7 +48,7 @@ export default function Home({navigation}) {
     // close the modal  
     setIsModalVisible(false);
 
-    addDocument(db, "goals", newGoal);
+    addDocument(db, newGoal, "goals");
   };
 
   const dissmissModal = () => {

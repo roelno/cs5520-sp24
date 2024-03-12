@@ -25,7 +25,9 @@ const GoalUsers = ( { id } ) => {
         topLevelUsers.forEach((user) => {
           // write to subcollection
           console.log(id);
-          addDocument(db, "goals", user, id, "users");
+          // addDocument(db, user, "goals", id, "users");
+          // Or, (database, data, path) as below
+          addDocument(db, user, `goals/${id}/users`);
         });
         
         

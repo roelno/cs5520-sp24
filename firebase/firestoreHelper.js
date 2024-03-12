@@ -1,7 +1,7 @@
 import {collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc} from "firebase/firestore";
 import {db} from "./firebase-config";
 
-export const addDocument = async (db, collectionName, data, docID, subCollection) => {
+export const addDocument = async (db, data, collectionName, docID, subCollection) => {
     try {
         if (docID) {
             await addDoc(collection(doc(db, collectionName, docID), subCollection), data);
