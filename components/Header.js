@@ -1,13 +1,17 @@
 // rnfe
 // rnf
 // rnfs
-import { View, Text, StyleSheet } from 'react-native'
+import { Dimensions, useWindowDimensions, View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
+const { windowWidth, windowHeight } = Dimensions.get('window');
+
 const Header = ({ name, version }) => {
+  const { width, height } = useWindowDimensions();
+  const paddingVerticalDynamic = height < width ? 0 : 5;
   return (
     <View>
-      <Text style={styles.header}>Welcome to {name} version {version}!</Text>
+      <Text style={[styles.header, {paddingVertical : paddingVerticalDynamic}]}>Welcome to {name} version {version}!</Text>
     </View>
   )
 }
@@ -26,7 +30,7 @@ const styles = StyleSheet.create({
     borderColor: 'darkmagenta',
     borderWidth: 2,
     borderRadius: 5,
-    padding: 5,
+    padding: windowWidth < 400 ? 5 : 10,
     fontWeight: 'bold',
     marginTop: 20,
   }

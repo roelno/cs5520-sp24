@@ -22,7 +22,7 @@ export const getAllDocs = async (path) => {
         let newArray = [];
         querySnapShot.forEach((docSnapShot) => {
             newArray.push(docSnapShot.data());
-            console.log(docSnapShot.data());
+            // console.log(docSnapShot.data());
         });
         return newArray;
     }   
