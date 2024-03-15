@@ -9,6 +9,10 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import { auth } from './firebase/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
+import PressableButton from './components/PressableButton';
+import {AntDesign} from '@expo/vector-icons'
+import Profile from './components/Profile'
+import { signOut } from 'firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,9 +43,39 @@ const App = () => {
     return (
       <>
         <Stack.Screen 
-          options={{title: "My Home Screen"}} 
-          name="Home" 
+          options={({navigation}) => {
+            return {
+              headerRight: () => {
+                return (
+                  <PressableButton onPressFunction={ () => {navigation.navigate("Profile")}}>
+                    <AntDesign name="user" size={24} color="white" />
+                  </PressableButton>
+                )}
+            }
+          }} 
+          name="All My Goals" 
           component={Home} />
+        <Stack.Screen 
+          name = "Profile"
+          component={Profile}
+          options={{
+            headerRight: () => {
+              return (
+                <PressableButton onPressFunction={ 
+                  async () => {
+                    try {
+                      await signOut(auth);
+                      console.log('Signed out');
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
+                 }>
+                  <AntDesign name="logout" size={24} color="white" />
+                </PressableButton>
+              )}
+          }}
+        />
         <Stack.Screen 
           options={({route}) => {
             return  {
