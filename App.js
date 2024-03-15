@@ -28,16 +28,16 @@ const App = () => {
 
   const AuthStack = () => {
     return (
-      <Stack.Navigator>
+      <>
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>
+      </>
     )
   }
   
   const AppStack = () => {
     return (
-      <Stack.Navigator>
+      <>
         <Stack.Screen 
           options={{title: "My Home Screen"}} 
           name="Home" 
@@ -51,19 +51,17 @@ const App = () => {
           }} 
           name="GoalDetails" 
           component={GoalDetails} />
-      </Stack.Navigator>
+      </>
     )
   }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerStyle: styles.headerStyle, headerTintColor: 'white'}}>
+      <Stack.Navigator
+        initialRouteName='SignUp'
+        screenOptions={{headerStyle: styles.headerStyle, headerTintColor: 'white'}}>
         
-        {userLoggedIn ? (
-          <Stack.Screen name="AppStack" component={AppStack} />
-        ) : (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
-        )}
+        {userLoggedIn ? AppStack() : AuthStack()}
 
         
       </Stack.Navigator>
