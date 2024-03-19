@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, StyleSheet, TextInput, View, Image } from 'react-native';
+import ImageManager from './ImageManager';
 
 const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
   const [text, setText] = useState("");
@@ -9,6 +10,7 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
       <View style={styles.container} >
         <Image source={{uri:"https://upload.wikimedia.org/wikipedia/en/0/0f/Space_Invaders_flyer%2C_1978.jpg",}} style={styles.image} />
         <Image source={require('./../assets/enemy.bmp')} style={styles.image} />
+        <ImageManager />
         <TextInput
           placeholder="Type something here"
           style={styles.input}
