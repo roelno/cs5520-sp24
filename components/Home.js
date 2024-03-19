@@ -5,9 +5,9 @@ import Header from "./Header";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
-import { db } from "../firebase/firebase-config";
+import { db, auth } from "../firebase/firebase-config";
 import{ addDocument, deleteDocument } from "../firebase/firestoreHelper";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 export default function Home({navigation}) {
   const appName = "My First App";
@@ -15,10 +15,12 @@ export default function Home({navigation}) {
   const [goals, setGoals] = useState([]); // [goal1, goal2, goal3]
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+      // set up a listener to get the goals from the database - only once
   useEffect(() => {
-    // set up a listener to get the goals from the database - only once
+    // Define the query with a where filter to match documents where the owner field equals the current user ID
+    const goalsQuery = query(collection(db, "goals"), where("owner", "==", auth.currentUser.uid));
     
-    const unsubsribe = onSnapshot(collection(db, "goals"), (querySnapshot) => {
+    const unsubsribe = onSnapshot(goalsQuery, (querySnapshot) => {
       if (querySnapshot.empty) {
         Alert.alert("No goals found, you need to add some goals.");
         return;
@@ -31,7 +33,12 @@ export default function Home({navigation}) {
       } );
       console.log(newArray);
       setGoals(newArray);
-    });
+    },
+    (error) => {
+      Alert.alert("Error getting goals", error.message);
+    },
+
+    );
     return () => {
       console.log("clean up");
       unsubsribe();

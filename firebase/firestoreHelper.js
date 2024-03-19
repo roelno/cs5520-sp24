@@ -1,5 +1,6 @@
 import {collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc} from "firebase/firestore";
-import {db} from "./firebase-config";
+import {db, auth} from "./firebase-config";
+
 
 export const addDocument = async (db, data, collectionName, docID, subCollection) => {
     try {
@@ -7,7 +8,12 @@ export const addDocument = async (db, data, collectionName, docID, subCollection
             await addDoc(collection(doc(db, collectionName, docID), subCollection), data);
         }
         else {
-            await addDoc(collection(db, collectionName), data);
+            if (collectionName === "goals") {
+                // add owner field to data
+                data = {...data, owner: auth.currentUser.uid};
+            }
+            const docRef = await addDoc(collection(db, collectionName), data);
+            console.log("Document written with ID: ", docRef.id);
         }
         // console.log("Document written with ID: ", docRef.id);
     }
@@ -19,6 +25,7 @@ export const addDocument = async (db, data, collectionName, docID, subCollection
 export const getAllDocs = async (path) => {
     try {
         const querySnapShot = await getDocs(collection(db, path));
+        
         let newArray = [];
         querySnapShot.forEach((docSnapShot) => {
             newArray.push(docSnapShot.data());
