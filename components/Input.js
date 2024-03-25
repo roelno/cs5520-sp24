@@ -4,13 +4,24 @@ import ImageManager from './ImageManager';
 
 const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
   const [text, setText] = useState("");
+  const [takenImageURI, setTakenImageURI] = useState("");
+
+  const confirmHandler = () => {
+    inputHandler(text, takenImageURI); 
+    setText("");
+  }
+  
+  const receiveImageURI = (imageURI) => {
+    console.log("we are receiving", imageURI);
+    setTakenImageURI(imageURI);
+  }
 
   return (
     <Modal visible={modalVisible}>
       <View style={styles.container} >
         <Image source={{uri:"https://upload.wikimedia.org/wikipedia/en/0/0f/Space_Invaders_flyer%2C_1978.jpg",}} style={styles.image} />
         <Image source={require('./../assets/enemy.bmp')} style={styles.image} />
-        <ImageManager />
+        <ImageManager receiveImageURI={receiveImageURI}/>
         <TextInput
           placeholder="Type something here"
           style={styles.input}
@@ -27,7 +38,7 @@ const Input = ({ inputHandler, modalVisible, dissmissModal }) => {
           <View style={styles.buttonView}>
             <Button
               title='Confirm'
-              onPress={() => {inputHandler(text); setText("")}}
+              onPress={() => confirmHandler()}
               disabled={!text}
             />
           </View>

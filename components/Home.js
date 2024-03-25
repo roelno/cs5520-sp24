@@ -45,7 +45,7 @@ export default function Home({navigation}) {
     }
   } , []);
 
-  const receiveInput = (newText) => {
+  const receiveInput = (newText, imageURI) => {
     // define an object to hold the new goal
     const newGoal = { value: newText};
 
